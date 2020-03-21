@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping_app/providers/cart.dart';
-import 'package:shopping_app/screens/cart_screen.dart';
 
+import './screens/cart_screen.dart';
 import './screens/products_overview_screen.dart';
 import './screens/product_detail_screen.dart';
 import './providers/products.dart';
+import './providers/cart.dart';
+import './providers/orders.dart';
+import './screens/orders_screen.dart';
+import './screens/user_products_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,21 +23,24 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: Cart(),
         ),
-      ],
-//      builder: (ctx) => Products(),
-      child: MaterialApp(
-        title: 'MyShop',
-        theme: ThemeData(
-          primarySwatch: Colors.amber,
-          accentColor: Colors.blue,
-          fontFamily: 'Lato',
+        ChangeNotifierProvider.value(
+          value: Orders(),
         ),
-        home: ProductOverviewScreen(),
-        routes: {
-          ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
-          CartScreen.rountName: (ctx) => CartScreen(),
-        },
-      ),
+      ],
+      child: MaterialApp(
+          title: 'MyShop',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            accentColor: Colors.deepOrange,
+            fontFamily: 'Lato',
+          ),
+          home: ProductsOverviewScreen(),
+          routes: {
+            ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+            CartScreen.routeName: (ctx) => CartScreen(),
+            OrdersScreen.routeName: (ctx) => OrdersScreen(),
+            UserProductsScreen.rounteName: (ctx) => UserProductsScreen(),
+          }),
     );
   }
 }
